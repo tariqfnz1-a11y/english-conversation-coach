@@ -3,237 +3,216 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>English Conversation Coach</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>Vibe Coding & Software Engineering Coach</title>
 <style>
-:root {
-  --blue:#1769c2; --navy:#12345b; --teal:#22b8a7;
-  --bg:#f1f7fc; --border:#d8e6f5; --ink:#173454;
-}
+:root{--bg:#101827;--panel:#192538;--panel2:#202f45;--line:#33445d;--text:#e8eef8;--muted:#9dafc6;--blue:#60a5fa;--green:#34d399;--orange:#fbbf24}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
-font-family:Arial,Helvetica,sans-serif}
-header{padding:23px;background:linear-gradient(120deg,#174e91,#27a9ba);
-color:white}
-header h1{margin:0 0 8px;font-size:clamp(24px,4vw,34px)}
-header p{margin:0;line-height:1.6}
-.layout{max-width:1200px;margin:22px auto;padding:0 14px;
-display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px}
-.panel,.chat{background:white;border:1px solid var(--border);
-border-radius:16px;box-shadow:0 5px 20px #12345b0b;overflow:hidden}
-.panel{padding:20px}
-h2{font-size:19px}
-label{display:block;font-weight:bold;margin:16px 0 7px}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 system-ui,Arial,sans-serif}
+header{padding:25px 20px;background:linear-gradient(120deg,#111d32,#173f60);border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:clamp(23px,4vw,34px)}
+header p{margin:7px 0 0;color:#c6d7ec}
+.layout{max-width:1250px;margin:22px auto;padding:0 15px;display:grid;grid-template-columns:290px minmax(0,1fr);gap:18px}
+.panel,.chat{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.panel{padding:19px;height:max-content}
+h2{font-size:18px;margin:0 0 14px}
+label{display:block;font-weight:650;margin:15px 0 6px}
 select,textarea,button{font:inherit}
-select{width:100%;padding:12px;border:1px solid var(--border);
-border-radius:9px;background:white;color:var(--ink)}
-button{border:0;border-radius:10px;padding:11px 14px;
-font-weight:bold;cursor:pointer}
-button:focus-visible,select:focus-visible,textarea:focus-visible{
-outline:3px solid #80c8ff;outline-offset:2px}
-button:disabled{opacity:.55;cursor:not-allowed}
-.primary{background:var(--blue);color:white}
-.secondary{background:#eaf2fb;color:var(--navy)}
-.actions{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
-.tip{background:#e9f8fa;padding:13px;border-radius:10px;
-margin-top:17px;font-size:14px;line-height:1.65}
-.chat{display:flex;flex-direction:column;min-height:690px}
-.chathead{padding:17px;border-bottom:1px solid var(--border);
-display:flex;align-items:center;gap:12px}
-.avatar{width:45px;height:45px;border-radius:50%;
-background:#dcecff;display:grid;place-items:center;font-size:26px}
-.online{font-size:13px;color:#169b79;margin-top:5px}
-#messages{padding:18px;flex:1;min-height:330px;max-height:55vh;
-overflow-y:auto;display:flex;flex-direction:column;gap:14px}
-.msg{max-width:88%;padding:12px 14px;border-radius:14px;
-line-height:1.55;overflow-wrap:anywhere}
-.bot{background:#e5efff;align-self:flex-start}
-.user{background:#d8f7ef;align-self:flex-end}
-.name{font-size:12px;font-weight:bold;margin-bottom:5px}
-.msg button{margin-top:8px;padding:6px 10px;font-size:13px}
-.feedback{background:#fff6dc;border-left:3px solid #eab84c;
-padding:10px;margin-top:9px;font-size:13px;border-radius:5px}
-.quick{display:flex;gap:7px;flex-wrap:wrap;padding:0 14px 12px}
-.quick button{font-size:12px;padding:9px}
-.composer{display:flex;align-items:center;gap:10px;padding:14px;
-border-top:1px solid var(--border)}
-#input{flex:1;min-width:0;min-height:55px;max-height:130px;
-resize:vertical;border:1px solid var(--border);border-radius:12px;
-padding:13px;color:var(--ink)}
-#mic{width:64px;height:64px;border-radius:50%;
-background:var(--blue);color:white;font-size:27px;
-box-shadow:0 0 0 4px #d9ebff}
-#mic.listening{background:#d7374d;box-shadow:0 0 0 4px #ffdde2}
-#status{font-size:13px;color:#53718d;margin-top:5px}
-.foot{text-align:center;color:#60778d;font-size:13px;padding:20px}
-@media(max-width:760px){
- .layout{grid-template-columns:1fr}
- .chat{min-height:580px}
- #messages{max-height:50vh}
- .panel{order:2}
- .composer{gap:8px;padding:10px}
- #mic{width:54px;height:54px;flex-shrink:0}
- .msg{max-width:95%}
-}
+select,textarea{width:100%;background:#101b2c;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px}
+button{border:0;border-radius:9px;padding:10px 13px;font-weight:650;cursor:pointer}
+button:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+button:disabled{opacity:.5;cursor:not-allowed}
+.primary{background:var(--blue);color:#081526}
+.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+.green{background:var(--green);color:#06281f}
+.actions,.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tip{padding:12px;background:#142e3c;border:1px solid #285066;border-radius:10px;margin-top:15px;color:#c9e6f0;font-size:13px}
+.chat{min-height:690px;display:flex;flex-direction:column}
+.chathead{padding:16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.avatar{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;background:#203c5a;font-size:24px}
+.status{color:var(--green);font-size:12px}
+#messages{flex:1;min-height:340px;max-height:55vh;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:14px}
+.msg{max-width:90%;padding:12px 14px;border-radius:12px;overflow-wrap:anywhere}
+.bot{align-self:flex-start;background:#24354d}
+.user{align-self:flex-end;background:#123e3b;border:1px solid #23685c}
+.name{font-size:12px;color:var(--blue);font-weight:750;margin-bottom:5px}
+.msg button{font-size:12px;margin-top:8px;padding:6px 9px}
+.feedback{font-size:13px;background:#3a3220;border-left:3px solid var(--orange);padding:9px;margin-top:9px;border-radius:5px}
+.quick{padding:0 14px 12px;margin:0}
+.quick button{font-size:12px}
+.composer{display:flex;gap:10px;align-items:center;padding:14px;border-top:1px solid var(--line)}
+#input{flex:1;min-width:0;resize:vertical;min-height:54px;max-height:130px}
+#mic{width:58px;height:58px;flex-shrink:0;border-radius:50%;font-size:25px;background:var(--green);color:#06281f}
+#mic.listening{background:#fb7185;color:#35101a}
+#send{height:50px}
+.foot{text-align:center;color:var(--muted);padding:20px;font-size:12px}
+code{color:#9ce9cf}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.chat{min-height:580px}.panel{order:2}#messages{max-height:48vh}.composer{padding:9px;gap:7px}#mic{width:49px;height:49px}.msg{max-width:96%}}
 </style>
 </head>
 <body>
-
 <header>
-  <h1>🗣️ English Conversation Coach</h1>
-  <p>Speak English with Alex. Listen, answer, and improve your confidence every day.</p>
+  <h1>⌘ Vibe Coding & Software Engineering Coach</h1>
+  <p>Practise technical English. Explain code, debug problems, discuss AI tools, and communicate like a software engineer.</p>
 </header>
 
 <main class="layout">
-  <aside class="panel">
-    <h2>🎯 Practice Settings</h2>
+<aside class="panel">
+  <h2>⚙️ Coaching Lab</h2>
+  <label for="level">English level</label>
+  <select id="level">
+    <option value="beginner">Beginner</option>
+    <option value="intermediate" selected>Intermediate</option>
+    <option value="advanced">Advanced</option>
+  </select>
 
-    <label for="level">English level</label>
-    <select id="level">
-      <option value="beginner">Beginner</option>
-      <option value="intermediate" selected>Intermediate</option>
-      <option value="advanced">Advanced</option>
-    </select>
+  <label for="topic">Technical scenario</label>
+  <select id="topic">
+    <option value="vibe">Vibe coding fundamentals</option>
+    <option value="debug">Debugging a JavaScript error</option>
+    <option value="github">GitHub and deployment</option>
+    <option value="frontend">Frontend development</option>
+    <option value="ai">AI-assisted development</option>
+    <option value="architecture">Software architecture</option>
+    <option value="interview">Software engineer interview</option>
+    <option value="presentation">Present your project</option>
+  </select>
 
-    <label for="topic">Conversation topic</label>
-    <select id="topic">
-      <option value="intro">Meeting someone</option>
-      <option value="school">School and teaching</option>
-      <option value="daily">Daily life</option>
-      <option value="travel">Travel</option>
-      <option value="shopping">Shopping</option>
-      <option value="interview">Job interview</option>
-      <option value="free">Free conversation</option>
-    </select>
+  <label for="voice">English speaking voice</label>
+  <select id="voice"><option value="">Default English voice</option></select>
 
-    <label for="voice">Alex's voice</label>
-    <select id="voice">
-      <option value="">Default English voice</option>
-    </select>
+  <div class="actions">
+    <button class="primary" id="start">▶ Start coaching</button>
+    <button class="secondary" id="reset">↻ Restart</button>
+  </div>
 
-    <div class="actions">
-      <button class="primary" id="start">Start conversation</button>
-      <button class="secondary" id="reset">Restart</button>
+  <div class="tip">
+    <strong>🎙️ How to practise</strong><br>
+    1. Listen to the coach's question.<br>
+    2. Click the microphone and answer aloud.<br>
+    3. Receive suggested language improvements.<br>
+    4. Practise explaining technical decisions clearly.
+  </div>
+
+  <div class="tip">
+    <strong>💻 Engineering communication</strong><br>
+    Practise describing bugs, explaining solutions, discussing trade-offs, writing GitHub commits, and presenting applications you build with AI.
+  </div>
+
+  <div class="tip">
+    <strong>Browser requirements</strong><br>
+    Use a supported browser such as Chrome and allow microphone access. Speech recognition availability can vary. No API key is required for this demo.
+  </div>
+</aside>
+
+<section class="chat">
+  <div class="chathead">
+    <div class="avatar">👨‍💻</div>
+    <div>
+      <strong>Alex · Senior Software Engineer</strong><br>
+      <span class="status" id="status">● Technical English coaching</span>
     </div>
+  </div>
 
-    <div class="tip">
-      <strong>🎙️ How to speak</strong><br>
-      1. Click the round microphone button.<br>
-      2. Allow microphone access.<br>
-      3. Speak your answer in English.<br>
-      4. Alex will answer aloud.<br>
-      5. Click the microphone again whenever you want to speak.
-    </div>
+  <div id="messages" aria-live="polite"></div>
 
-    <div class="tip">
-      <strong>💡 Learning tip</strong><br>
-      Speak in complete sentences. Do not worry about mistakes. Review the suggested corrections and try again.
-    </div>
+  <div class="quick">
+    <button class="secondary" data-reply="I use AI to generate code, then test and improve it.">AI workflow</button>
+    <button class="secondary" data-reply="I would inspect the browser console to identify the error.">Debugging</button>
+    <button class="secondary" data-reply="I would check the GitHub Pages deployment settings.">GitHub 404</button>
+    <button class="secondary" data-reply="My application helps users solve a practical problem.">Present a project</button>
+  </div>
 
-    <div class="tip">
-      <strong>Browser support</strong><br>
-      Speech recognition works best in supported versions of Chrome. It may require an internet connection. This version uses scripted replies and browser speech tools, not a connected AI service.
-    </div>
-  </aside>
-
-  <section class="chat" aria-label="Conversation with Alex">
-    <div class="chathead">
-      <div class="avatar">👨🏻‍💻</div>
-      <div>
-        <strong>Alex · Your English Partner</strong>
-        <div class="online" id="status">● Ready to practise</div>
-      </div>
-    </div>
-
-    <div id="messages" aria-live="polite"></div>
-
-    <div class="quick">
-      <button class="secondary" data-reply="Hello! Nice to meet you.">👋 Greeting</button>
-      <button class="secondary" data-reply="I am from Pakistan.">🌍 Where I'm from</button>
-      <button class="secondary" data-reply="Could you repeat that, please?">🔁 Repeat</button>
-      <button class="secondary" data-reply="I would like to improve my spoken English.">🎯 My goal</button>
-    </div>
-
-    <div class="composer">
-      <textarea id="input" rows="2"
-        placeholder="Type your English reply here..."
-        aria-label="Your English reply"></textarea>
-      <button id="mic" title="Start speaking" aria-label="Start speaking">🎙️</button>
-      <button class="primary" id="send">Send ➤</button>
-    </div>
-  </section>
+  <div class="composer">
+    <textarea id="input" rows="2" placeholder="Explain your code or answer the question..." aria-label="Your answer"></textarea>
+    <button id="mic" aria-label="Start microphone" title="Speak your answer">🎙️</button>
+    <button class="primary" id="send">Send ➤</button>
+  </div>
+</section>
 </main>
 
-<div class="foot">English Conversation Coach · Practise a little every day.</div>
+<div class="foot">Vibe Coding & Software Engineering Coach · GitHub Pages demo</div>
 
 <script>
 "use strict";
-
 const $ = id => document.getElementById(id);
 const messages = $("messages");
 const input = $("input");
 
+let topic = "vibe";
 let turn = 0;
-let topic = "intro";
+let active = false;
 let listening = false;
 let recognition = null;
-let sessionActive = false;
+let sessionId = 0;
 
-const openings = {
-  intro: "Hello! My name is Alex. Nice to meet you! What is your name?",
-  school: "Hello! I am Alex. I would love to talk about education. What do you do?",
-  daily: "Hi! How has your day been so far?",
-  travel: "Hello! I enjoy talking about travel. Which place would you love to visit?",
-  shopping: "Hi! Do you prefer shopping online or visiting shops?",
-  interview: "Good morning! Welcome to the interview. Could you please introduce yourself?",
-  free: "Hello! It is lovely to talk with you. What would you like to discuss today?"
+const scenarios = {
+vibe:{
+opening:"Welcome to our engineering coaching session. Let's start with vibe coding. How would you explain vibe coding to a colleague?",
+questions:[
+"What instructions would you give an AI coding assistant to improve the result?",
+"How would you verify that AI-generated code actually works?",
+"What would you do if the AI repeatedly produced the wrong solution?"
+]},
+debug:{
+opening:"You are reviewing a JavaScript application. A button does nothing when clicked. How would you investigate the problem?",
+questions:[
+"What information would you look for in the browser console?",
+"How would you reproduce the bug reliably?",
+"How would you test your fix before deploying it?"
+]},
+github:{
+opening:"A website hosted on GitHub Pages displays a 404 error. Walk me through your debugging process.",
+questions:[
+"Why must the entry file usually be named index.html?",
+"What would you check in the repository's Pages settings?",
+"How would you confirm that the latest deployment succeeded?"
+]},
+frontend:{
+opening:"You are building a responsive web application. How would you make the interface accessible on mobile devices?",
+questions:[
+"Why are semantic HTML elements important?",
+"How would you handle a button click in JavaScript?",
+"How would you test the application on different screen sizes?"
+]},
+ai:{
+opening:"Imagine you are using an AI coding assistant to build a small web application. How would you plan the task?",
+questions:[
+"How would you write a precise prompt for the coding assistant?",
+"How would you identify security problems in generated code?",
+"When would you stop using AI suggestions and investigate the issue yourself?"
+]},
+architecture:{
+opening:"You need to build a small educational web application. How would you choose its architecture?",
+questions:[
+"What is the difference between frontend and backend responsibilities?",
+"When would you need a database or an API?",
+"How would you balance maintainability, cost, and performance?"
+]},
+interview:{
+opening:"Welcome to your software engineering interview practice. Tell me about a project you have built or would like to build.",
+questions:[
+"What was the most difficult technical problem in that project?",
+"How did you test your solution?",
+"What would you improve if you had another week?"
+]},
+presentation:{
+opening:"Imagine you are presenting an AI-built application to a client. What problem does your application solve, and who benefits from it?",
+questions:[
+"What technologies did you use, and why?",
+"How did you test the application with real use cases?",
+"What is the next feature you would add?"
+]}
 };
 
-const questions = {
-  intro: [
-    "Where are you from?",
-    "What do you do?",
-    "What do you enjoy doing in your free time?"
-  ],
-  school: [
-    "What do you enjoy most about teaching?",
-    "What is one challenge teachers face today?",
-    "How do you motivate your students?"
-  ],
-  daily: [
-    "What do you usually do in the morning?",
-    "What was the best part of your day?",
-    "What are your plans for tomorrow?"
-  ],
-  travel: [
-    "Why would you like to visit that place?",
-    "Do you prefer travelling alone or with family?",
-    "What do you usually pack for a trip?"
-  ],
-  shopping: [
-    "How do you decide whether something is good value?",
-    "What is something useful you bought recently?",
-    "Do you prefer paying by cash or card?"
-  ],
-  interview: [
-    "What are your main strengths?",
-    "Why are you interested in this role?",
-    "Can you describe a challenge you solved?"
-  ],
-  free: [
-    "Could you tell me a little more about that?",
-    "Why is that important to you?",
-    "What happened next?"
-  ]
-};
-
-function addMessage(text, who = "bot", feedback = "") {
+function addMessage(text, who="bot", feedback="") {
   const box = document.createElement("div");
   box.className = "msg " + who;
 
   const name = document.createElement("div");
   name.className = "name";
-  name.textContent = who === "bot" ? "Alex" : "You";
+  name.textContent = who === "bot" ? "ALEX · ENGINEERING COACH" : "YOUR RESPONSE";
 
   const body = document.createElement("div");
   body.textContent = text;
@@ -247,210 +226,171 @@ function addMessage(text, who = "bot", feedback = "") {
   }
 
   if (who === "bot") {
-    const listenButton = document.createElement("button");
-    listenButton.className = "secondary";
-    listenButton.textContent = "🔊 Listen";
-    listenButton.onclick = () => speak(text);
-    box.append(listenButton);
+    const listen = document.createElement("button");
+    listen.className = "secondary";
+    listen.textContent = "🔊 Listen";
+    listen.onclick = () => speak(text);
+    box.append(listen);
   }
 
   messages.append(box);
   messages.scrollTop = messages.scrollHeight;
 }
 
-function speak(text) {
+function speak(text, session=sessionId) {
   if (!("speechSynthesis" in window)) {
-    $("status").textContent = "Speech playback is unavailable.";
+    $("status").textContent = "Speech playback is not supported.";
     return;
   }
 
   window.speechSynthesis.cancel();
-
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "en-US";
 
-  const selected = $("voice").value;
-  const available = window.speechSynthesis.getVoices();
-  const chosen = available.find(v => v.name === selected);
+  const chosen = window.speechSynthesis.getVoices()
+    .find(v => v.name === $("voice").value);
   if (chosen) utterance.voice = chosen;
 
-  const level = $("level").value;
-  utterance.rate =
-    level === "beginner" ? 0.82 :
-    level === "advanced" ? 1.02 : 0.92;
+  utterance.rate = $("level").value === "beginner" ? 0.82 :
+                   $("level").value === "advanced" ? 1.02 : 0.92;
 
   utterance.onstart = () => {
-    $("status").textContent = "🔊 Alex is speaking...";
+    if (session === sessionId) $("status").textContent = "🔊 Alex is speaking";
   };
   utterance.onend = () => {
-    $("status").textContent = "● Your turn — click the microphone to reply";
+    if (session === sessionId) $("status").textContent = "● Your turn — use the microphone";
   };
   utterance.onerror = () => {
-    $("status").textContent = "● Ready to practise";
+    if (session === sessionId) $("status").textContent = "● Ready to practise";
   };
 
   window.speechSynthesis.speak(utterance);
 }
 
-function startConversation() {
-  if (recognition && listening) {
-    try { recognition.stop(); } catch (e) {}
-  }
+function start() {
+  sessionId++;
+  const thisSession = sessionId;
 
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
+  if (recognition && listening) {
+    try { recognition.stop(); } catch(e) {}
   }
+  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
 
   listening = false;
-  sessionActive = true;
+  active = true;
   turn = 0;
   topic = $("topic").value;
   messages.replaceChildren();
   $("mic").classList.remove("listening");
   $("mic").textContent = "🎙️";
-  $("status").textContent = "● Conversation started";
 
-  const greeting = openings[topic];
-  addMessage(greeting);
-
-  // Display the conversation immediately. The first spoken greeting
-  // is started by the user's Start button click.
-  speak(greeting);
+  const opening = scenarios[topic].opening;
+  addMessage(opening);
+  speak(opening, thisSession);
 }
 
-function correctEnglish(text) {
+function improveEnglish(text) {
   let result = text.trim().replace(/\s+/g, " ");
   result = result.replace(/\bi\b/g, "I");
 
   const fixes = {
-    im: "I'm",
-    dont: "don't",
-    doesnt: "doesn't",
-    cant: "can't",
-    wont: "won't",
-    didnt: "didn't",
-    isnt: "isn't",
-    arent: "aren't",
-    wasnt: "wasn't",
-    werent: "weren't"
+    im:"I'm", dont:"don't", doesnt:"doesn't", cant:"can't",
+    didnt:"didn't", isnt:"isn't", wont:"won't"
   };
 
-  result = result.replace(
-    /\b(im|dont|doesnt|cant|wont|didnt|isnt|arent|wasnt|werent)\b/gi,
-    word => fixes[word.toLowerCase()]
-  );
+  result = result.replace(/\b(im|dont|doesnt|cant|didnt|isnt|wont)\b/gi,
+    word => fixes[word.toLowerCase()]);
 
   if (result && !/[.!?]$/.test(result)) result += ".";
   return result;
 }
 
-function makeReply(text) {
-  const lower = text.toLowerCase();
-  const list = questions[topic];
-
-  if (/^(hi|hello|hey)\b/.test(lower)) {
-    return "Hello! It is great to meet you. " + list[turn % list.length];
+function makeFeedback(original, improved) {
+  if (original.trim() !== improved.trim()) {
+    return "English improvement: " + improved +
+      " Remember: this is a basic writing suggestion, not a full grammar check.";
   }
-
-  if (/repeat|say that again|pardon|more slowly/.test(lower)) {
-    return "Of course! I will try to make it clearer. " +
-      list[turn % list.length];
-  }
-
-  if (/thank/.test(lower)) {
-    return "You are very welcome! " + list[turn % list.length];
-  }
-
-  if (/how are you/.test(lower)) {
-    return "I am doing well, thank you for asking! " +
-      list[turn % list.length];
-  }
-
-  if (topic === "intro" && turn === 1 &&
-      /\b(tariq|my name is|i am|i'm)\b/.test(lower)) {
-    return "Nice to meet you! " + list[0];
-  }
-
-  const responses = [
-    "That sounds interesting! Could you tell me a little more?",
-    "Thank you for sharing that. " + list[turn % list.length],
-    "I see what you mean. Can you give me an example?",
-    "That is a good point. " + list[turn % list.length]
-  ];
-
-  let reply = responses[turn % responses.length];
-
-  if ($("level").value === "beginner") {
-    reply = list[turn % list.length];
-  }
-
-  return reply;
+  return "Communication tip: explain your reasoning, mention the evidence, and describe how you would test your solution.";
 }
 
-function sendMessage(text = input.value) {
+function respond(text=input.value) {
   text = text.trim();
   if (!text) return;
+  if (!active) start();
 
-  if (!sessionActive) startConversation();
-
+  const thisSession = sessionId;
   addMessage(text, "user");
   input.value = "";
   input.style.height = "auto";
 
-  const corrected = correctEnglish(text);
-  let feedback;
+  const improved = improveEnglish(text);
+  const feedback = makeFeedback(text, improved);
+  const lower = text.toLowerCase();
+  const questions = scenarios[topic].questions;
 
-  if (text !== corrected) {
-    feedback = "Suggested improvement: " + corrected;
+  let reply;
+  if (/repeat|more slowly|pardon|didn't understand/.test(lower)) {
+    reply = "Certainly. Let me rephrase the question. " + questions[turn % questions.length];
+  } else if (/thank/.test(lower)) {
+    reply = "You're welcome. Let's continue building your technical communication skills. " + questions[turn % questions.length];
+  } else if (/404/.test(lower) && topic === "github") {
+    reply = "Good example. Check the file path, branch, publishing folder, and deployment logs. Which would you inspect first?";
+  } else if (/console|error|debug/.test(lower) && topic === "debug") {
+    reply = "That is a useful debugging direction. How would you reproduce the issue and confirm its root cause?";
   } else {
-    feedback = "Good effort! Try adding a reason or an example to develop your answer.";
+    const beginner = $("level").value === "beginner";
+    const options = beginner
+      ? ["Good start. Can you explain that with one example?",
+         "Nice effort. What would you check first?",
+         "Let's break it into smaller steps. What would you do next?"]
+      : [
+         "Interesting approach. What trade-offs would you consider?",
+         "How would you validate that your solution works reliably?",
+         "What alternative would you consider, and why?",
+         "Let's make that more specific. What would your next step be?"
+        ];
+    reply = questions[turn % questions.length] + " " +
+      options[turn % options.length];
   }
 
   turn++;
-  const reply = makeReply(text);
 
-  $("status").textContent = "Alex is preparing a reply...";
-
+  $("status").textContent = "Preparing coaching feedback...";
   window.setTimeout(() => {
+    if (thisSession !== sessionId) return;
     addMessage(reply, "bot", feedback);
-    speak(reply);
-  }, 250);
+    speak(reply, thisSession);
+  }, 300);
 }
 
-$("start").addEventListener("click", startConversation);
-$("reset").addEventListener("click", startConversation);
-$("send").addEventListener("click", () => sendMessage());
+$("start").addEventListener("click", start);
+$("reset").addEventListener("click", start);
+$("send").addEventListener("click", () => respond());
 
-input.addEventListener("keydown", event => {
-  if (event.key === "Enter" && !event.shiftKey) {
-    event.preventDefault();
-    sendMessage();
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    respond();
   }
 });
-
 input.addEventListener("input", () => {
   input.style.height = "auto";
   input.style.height = Math.min(input.scrollHeight, 130) + "px";
 });
 
 document.querySelectorAll("[data-reply]").forEach(button => {
-  button.addEventListener("click", () => sendMessage(button.dataset.reply));
+  button.addEventListener("click", () => respond(button.dataset.reply));
 });
 
 function loadVoices() {
   if (!("speechSynthesis" in window)) return;
-
   const select = $("voice");
   const previous = select.value;
   select.replaceChildren(new Option("Default English voice", ""));
-
   window.speechSynthesis.getVoices()
     .filter(v => v.lang && v.lang.toLowerCase().startsWith("en"))
     .forEach(v => select.add(new Option(v.name + " (" + v.lang + ")", v.name)));
-
-  if ([...select.options].some(o => o.value === previous)) {
-    select.value = previous;
-  }
+  if ([...select.options].some(o => o.value === previous)) select.value = previous;
 }
 
 if ("speechSynthesis" in window) {
@@ -458,26 +398,25 @@ if ("speechSynthesis" in window) {
   window.speechSynthesis.onvoiceschanged = loadVoices;
 }
 
-const Recognition =
+const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
-if (Recognition) {
-  recognition = new Recognition();
+if (SpeechRecognition) {
+  recognition = new SpeechRecognition();
   recognition.lang = "en-US";
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
   $("mic").addEventListener("click", () => {
     if (listening) {
-      try { recognition.stop(); } catch (e) {}
+      try { recognition.stop(); } catch(e) {}
       return;
     }
-
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     try {
       recognition.start();
-    } catch (e) {
-      $("status").textContent =
-        "Could not start microphone. Please try again.";
+    } catch(e) {
+      $("status").textContent = "Could not start microphone. Please try again.";
     }
   });
 
@@ -486,7 +425,6 @@ if (Recognition) {
     $("mic").classList.add("listening");
     $("mic").textContent = "⏹️";
     $("status").textContent = "🎙️ Listening — speak now";
-    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   };
 
   recognition.onresult = event => {
@@ -494,21 +432,19 @@ if (Recognition) {
     listening = false;
     $("mic").classList.remove("listening");
     $("mic").textContent = "🎙️";
-    sendMessage(transcript);
+    respond(transcript);
   };
 
   recognition.onerror = event => {
     listening = false;
     $("mic").classList.remove("listening");
     $("mic").textContent = "🎙️";
-
-    const message = event.error === "not-allowed"
-      ? "Allow microphone access in your browser settings."
+    $("status").textContent =
+      event.error === "not-allowed"
+      ? "Microphone permission denied. Allow access in browser settings."
       : event.error === "no-speech"
-      ? "No speech detected. Please try again."
-      : "Microphone error: " + event.error + ". You can type instead.";
-
-    $("status").textContent = message;
+      ? "No speech detected. Try again or type your answer."
+      : "Microphone issue: " + event.error + ". You can type instead.";
   };
 
   recognition.onend = () => {
@@ -519,12 +455,12 @@ if (Recognition) {
 } else {
   $("mic").addEventListener("click", () => {
     $("status").textContent =
-      "Speech recognition is unsupported here. Try Chrome or type your reply.";
+      "Speech recognition is unsupported here. Try Chrome or type your answer.";
   });
 }
 
-// Start a conversation as soon as the website opens.
-startConversation();
+// Begin the technical conversation as soon as the page opens.
+start();
 </script>
 </body>
 </html>
