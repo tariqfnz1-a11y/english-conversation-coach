@@ -4,168 +4,582 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#173f5f">
+<meta name="description" content="Practise English speaking and listening with a virtual conversation partner.">
 <title>English Conversation Coach</title>
+
 <style>
-:root{--navy:#173f5f;--blue:#20639b;--teal:#3caea3;--bg:#f3f7fb;--ink:#183044;--muted:#62788a;--white:#fff;--border:#dbe5ee;--gold:#f6d55c}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}
-header{background:linear-gradient(120deg,var(--navy),var(--blue));color:white;padding:25px 16px 22px;text-align:center}
-header h1{margin:0;font-size:clamp(1.5rem,4vw,2.2rem)}header p{margin:8px auto 0;max-width:720px;opacity:.92}
-.wrap{max-width:1050px;margin:20px auto;padding:0 14px;display:grid;grid-template-columns:280px 1fr;gap:16px}
-.panel,.chat-panel{background:white;border:1px solid var(--border);border-radius:16px;box-shadow:0 6px 22px #173f5f0d;overflow:hidden}
-.panel{padding:18px;height:max-content}.panel h2{font-size:1.05rem;margin:0 0 14px}
-label{font-weight:650;font-size:.9rem;display:block;margin:14px 0 6px}
-select,button,input{font:inherit}select{width:100%;padding:11px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--ink)}
-.tip{font-size:.88rem;color:var(--muted);line-height:1.55;background:#f1f8fa;border-radius:10px;padding:12px;margin-top:16px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-button{border:0;border-radius:10px;padding:10px 13px;cursor:pointer;font-weight:650;transition:transform .12s,opacity .12s}
-button:active{transform:scale(.98)}button:disabled{opacity:.5;cursor:not-allowed}
-.primary{background:var(--blue);color:white}.secondary{background:#eaf2f8;color:var(--navy)}.teal{background:var(--teal);color:#052e2b}.warning{background:#fff3d6;color:#704b00}
-.chat-panel{display:flex;flex-direction:column;min-height:650px}
-.chat-head{padding:15px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
-.avatar{width:44px;height:44px;display:grid;place-items:center;background:#e5f5f2;border-radius:50%;font-size:1.45rem}
-.chat-head strong{display:block}.status{font-size:.83rem;color:#27846e}
-#messages{padding:18px;flex:1;min-height:350px;max-height:55vh;overflow-y:auto;display:flex;flex-direction:column;gap:13px}
-.msg{max-width:88%;padding:12px 14px;border-radius:14px;line-height:1.5;overflow-wrap:anywhere}
-.bot{background:#edf3f8;align-self:flex-start;border-bottom-left-radius:4px}.user{background:#dff5ef;align-self:flex-end;border-bottom-right-radius:4px}
-.msg small{display:block;color:var(--muted);font-size:.75rem;margin-bottom:4px;font-weight:700}
-.correction{margin-top:8px;padding:9px 10px;background:#fff7df;border-left:3px solid var(--gold);border-radius:6px;font-size:.9rem}
-.quick{padding:0 16px 12px;display:flex;gap:7px;flex-wrap:wrap}.quick button{font-size:.82rem;padding:8px 10px}
-.composer{border-top:1px solid var(--border);padding:13px;display:flex;gap:8px;align-items:flex-end}
-#userInput{min-width:0;flex:1;resize:vertical;min-height:46px;max-height:130px;border:1px solid var(--border);border-radius:11px;padding:12px;font:inherit;color:var(--ink)}
-#userInput:focus,select:focus{outline:2px solid #8dc9e8;outline-offset:1px}
-#micBtn{min-width:46px}.foot{text-align:center;color:var(--muted);font-size:.82rem;padding:0 14px 24px}
-.hidden{display:none!important}
-@media(max-width:760px){.wrap{grid-template-columns:1fr;margin-top:12px}.panel{order:1}.chat-panel{order:0;min-height:620px}#messages{max-height:48vh}.panel .tip{margin-top:12px}}
+:root {
+  --navy:#173f5f;
+  --blue:#20639b;
+  --teal:#3caea3;
+  --bg:#f3f7fb;
+  --ink:#183044;
+  --muted:#62788a;
+  --border:#dbe5ee;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+}
+header {
+  background:linear-gradient(120deg,var(--navy),var(--blue));
+  color:white;
+  padding:25px 16px;
+  text-align:center;
+}
+header h1 { margin:0; font-size:clamp(1.5rem,4vw,2.2rem); }
+header p { max-width:700px; margin:8px auto 0; }
+.wrap {
+  max-width:1050px;
+  margin:20px auto;
+  padding:0 14px;
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+  gap:16px;
+}
+.panel,.chat-panel {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:0 6px 22px #173f5f0d;
+  overflow:hidden;
+}
+.panel { padding:18px; height:max-content; }
+.panel h2 { font-size:1.05rem; margin:0 0 14px; }
+label {
+  display:block;
+  font-weight:650;
+  font-size:.9rem;
+  margin:14px 0 6px;
+}
+select,button,textarea { font:inherit; }
+select {
+  width:100%;
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:white;
+  color:var(--ink);
+}
+.actions,.quick {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.actions { margin-top:14px; }
+button {
+  border:0;
+  border-radius:10px;
+  padding:10px 13px;
+  cursor:pointer;
+  font-weight:650;
+}
+button:disabled { opacity:.5; cursor:not-allowed; }
+button:focus-visible,textarea:focus-visible,select:focus-visible {
+  outline:3px solid #8dc9e8;
+  outline-offset:2px;
+}
+.primary { background:var(--blue); color:white; }
+.secondary { background:#eaf2f8; color:var(--navy); }
+.teal { background:var(--teal); color:#052e2b; }
+.tip {
+  font-size:.88rem;
+  color:var(--muted);
+  line-height:1.55;
+  background:#f1f8fa;
+  border-radius:10px;
+  padding:12px;
+  margin-top:16px;
+}
+.chat-panel { display:flex; flex-direction:column; min-height:650px; }
+.chat-head {
+  padding:15px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.avatar {
+  width:44px;height:44px;
+  display:grid;place-items:center;
+  background:#e5f5f2;
+  border-radius:50%;
+  font-size:1.45rem;
+}
+.status { font-size:.83rem; color:#27846e; display:block; }
+#messages {
+  padding:18px;
+  flex:1;
+  min-height:350px;
+  max-height:55vh;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:13px;
+}
+.msg {
+  max-width:88%;
+  padding:12px 14px;
+  border-radius:14px;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+.bot { background:#edf3f8; align-self:flex-start; border-bottom-left-radius:4px; }
+.user { background:#dff5ef; align-self:flex-end; border-bottom-right-radius:4px; }
+.msg small {
+  display:block;
+  color:var(--muted);
+  font-size:.75rem;
+  margin-bottom:4px;
+  font-weight:700;
+}
+.correction {
+  margin-top:8px;
+  padding:9px 10px;
+  background:#fff7df;
+  border-left:3px solid #f6d55c;
+  border-radius:6px;
+  font-size:.9rem;
+}
+.quick { padding:0 16px 12px; }
+.quick button { font-size:.82rem; padding:8px 10px; }
+.composer {
+  border-top:1px solid var(--border);
+  padding:13px;
+  display:flex;
+  gap:8px;
+  align-items:flex-end;
+}
+#userInput {
+  min-width:0;
+  flex:1;
+  resize:vertical;
+  min-height:46px;
+  max-height:130px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:12px;
+  color:var(--ink);
+}
+#micBtn { min-width:46px; }
+.foot {
+  text-align:center;
+  color:var(--muted);
+  font-size:.82rem;
+  padding:0 14px 24px;
+}
+@media(max-width:760px) {
+  .wrap { grid-template-columns:1fr; margin-top:12px; }
+  .chat-panel { min-height:600px; }
+  #messages { max-height:48vh; }
+}
 </style>
 </head>
+
 <body>
 <header>
   <h1>🗣️ English Conversation Coach</h1>
   <p>Practise everyday English with a friendly virtual partner. Listen, speak, and improve one conversation at a time.</p>
 </header>
+
 <main class="wrap">
   <aside class="panel">
-    <h2>🎯 Practice settings</h2>
+    <h2>🎯 Practice Settings</h2>
+
     <label for="level">Your English level</label>
-    <select id="level"><option value="beginner">Beginner</option><option value="intermediate" selected>Intermediate</option><option value="advanced">Advanced</option></select>
+    <select id="level">
+      <option value="beginner">Beginner</option>
+      <option value="intermediate" selected>Intermediate</option>
+      <option value="advanced">Advanced</option>
+    </select>
+
     <label for="topic">Conversation topic</label>
     <select id="topic">
-      <option value="intro">Meeting someone</option><option value="school">School and teaching</option>
-      <option value="daily">Daily routine</option><option value="travel">Travel</option>
-      <option value="shopping">Shopping</option><option value="interview">Job interview</option>
+      <option value="intro">Meeting someone</option>
+      <option value="school">School and teaching</option>
+      <option value="daily">Daily routine</option>
+      <option value="travel">Travel</option>
+      <option value="shopping">Shopping</option>
+      <option value="interview">Job interview</option>
       <option value="free">Free conversation</option>
     </select>
+
     <label for="voice">Listening voice</label>
-    <select id="voice"><option value="">Default English voice</option></select>
+    <select id="voice">
+      <option value="">Default English voice</option>
+    </select>
+
     <div class="actions">
       <button class="primary" id="startBtn">Start conversation</button>
       <button class="secondary" id="resetBtn">Restart</button>
     </div>
-    <div class="tip"><strong>How to practise</strong><br>1. Read or listen to the partner's message.<br>2. Reply in your own words.<br>3. Use the 🎙️ button to speak if your browser supports it.<br>4. Review the suggested correction and try again.</div>
-    <div class="tip"><strong>Browser note</strong><br>Listening uses your device's speech synthesis. Speech recognition is supported in some browsers, especially Chrome. This demo does not send your speech to an AI service.</div>
+
+    <div class="tip">
+      <strong>How to practise</strong><br>
+      1. Read or listen to the partner's message.<br>
+      2. Reply in your own words.<br>
+      3. Use the microphone if supported.<br>
+      4. Review the writing feedback.
+    </div>
+
+    <div class="tip">
+      <strong>Browser note</strong><br>
+      Speech playback uses your browser. Microphone recognition requires browser support and permission. This demo does not connect to an AI service.
+    </div>
   </aside>
+
   <section class="chat-panel" aria-label="English practice chat">
     <div class="chat-head">
       <div class="avatar">🙂</div>
-      <div><strong>Alex · Your English partner</strong><span class="status">● Ready to practise</span></div>
+      <div>
+        <strong>Alex · Your English partner</strong>
+        <span class="status" id="status">● Ready to practise</span>
+      </div>
     </div>
+
     <div id="messages" aria-live="polite"></div>
-    <div class="quick" id="quickReplies">
+
+    <div class="quick">
       <button class="secondary" data-reply="Hello! My name is Tariq. Nice to meet you.">Try a greeting</button>
       <button class="secondary" data-reply="Could you please repeat that more slowly?">Ask to repeat</button>
       <button class="secondary" data-reply="I am learning English to communicate more confidently.">Talk about your goal</button>
     </div>
+
     <div class="composer">
-      <textarea id="userInput" rows="1" placeholder="Type your reply in English…" aria-label="Your reply"></textarea>
+      <textarea id="userInput" rows="1" placeholder="Type your reply in English..." aria-label="Your reply"></textarea>
       <button class="secondary" id="micBtn" title="Speak your reply" aria-label="Speak your reply">🎙️</button>
       <button class="primary" id="sendBtn">Send ➤</button>
     </div>
   </section>
 </main>
+
 <div class="foot">English Conversation Coach · Free GitHub Pages demo · Keep practising every day</div>
+
 <script>
-const $=id=>document.getElementById(id);
-const messages=$('messages'), input=$('userInput');
-let turn=0, currentTopic='intro', listening=false;
-const openings={
- intro:"Hello! Good evening. My name is Alex. Is this seat taken?",
- school:"Hello! I’m Alex. I’m interested in education. What do you do?",
- daily:"Hi there! Let’s talk about everyday life. How has your day been?",
- travel:"Hello! I’m planning a trip. Do you enjoy travelling?",
- shopping:"Hi! I’m going shopping this weekend. What do you usually like to buy?",
- interview:"Good morning. Thank you for coming. Could you please introduce yourself?",
- free:"Hello! It’s nice to talk with you. What would you like to talk about today?"
+"use strict";
+
+const $ = id => document.getElementById(id);
+const messages = $("messages");
+const input = $("userInput");
+
+let turn = 0;
+let currentTopic = "intro";
+let listening = false;
+let recognition = null;
+
+const openings = {
+  intro: "Hello! My name is Alex. Is this seat taken?",
+  school: "Hello! I'm Alex. I'm interested in education. What do you do?",
+  daily: "Hi there! Let's talk about everyday life. How has your day been?",
+  travel: "Hello! I'm planning a trip. Do you enjoy travelling?",
+  shopping: "Hi! I'm going shopping this weekend. What do you usually like to buy?",
+  interview: "Good morning. Thank you for coming. Could you please introduce yourself?",
+  free: "Hello! It's nice to talk with you. What would you like to talk about today?"
 };
-const followups={
- intro:["Where are you from?","What do you enjoy doing in your free time?","That sounds interesting. What do you like most about your work?"],
- school:["What do you enjoy most about teaching or learning?","What is one challenge you face at work?","How do you motivate learners?"],
- daily:["What do you usually do in the morning?","What was the best part of your day?","What would you like to do tomorrow?"],
- travel:["Which place would you love to visit, and why?","Do you prefer travelling alone or with family?","What do you usually pack for a trip?"],
- shopping:["Do you prefer shopping online or in a store? Why?","How do you decide whether something is good value?","What is something useful you bought recently?"],
- interview:["Why are you interested in this role?","What are your main strengths?","Can you describe a challenge you solved?"],
- free:["Could you tell me a little more about that?","Why is that important to you?","What happened next?"]
+
+const followups = {
+  intro: [
+    "Where are you from?",
+    "What do you enjoy doing in your free time?",
+    "What do you like most about your work?"
+  ],
+  school: [
+    "What do you enjoy most about teaching or learning?",
+    "What is one challenge you face at work?",
+    "How do you motivate learners?"
+  ],
+  daily: [
+    "What do you usually do in the morning?",
+    "What was the best part of your day?",
+    "What would you like to do tomorrow?"
+  ],
+  travel: [
+    "Which place would you love to visit, and why?",
+    "Do you prefer travelling alone or with family?",
+    "What do you usually pack for a trip?"
+  ],
+  shopping: [
+    "Do you prefer shopping online or in a store? Why?",
+    "How do you decide whether something is good value?",
+    "What is something useful you bought recently?"
+  ],
+  interview: [
+    "Why are you interested in this role?",
+    "What are your main strengths?",
+    "Can you describe a challenge you solved?"
+  ],
+  free: [
+    "Could you tell me a little more about that?",
+    "Why is that important to you?",
+    "What happened next?"
+  ]
 };
-function addMessage(text,who='bot',correction=''){
- const el=document.createElement('div');el.className='msg '+who;
- const label=document.createElement('small');label.textContent=who==='bot'?'ALEX · PARTNER':'YOU';
- const body=document.createElement('div');body.textContent=text;el.append(label,body);
- if(correction){const c=document.createElement('div');c.className='correction';c.textContent=correction;el.append(c)}
- if(who==='bot'){const speak=document.createElement('button');speak.className='secondary';speak.textContent='🔊 Listen';speak.style.marginTop='8px';speak.style.padding='6px 9px';speak.onclick=()=>speakText(text);el.append(speak)}
- messages.append(el);messages.scrollTop=messages.scrollHeight;
+
+function addMessage(text, who = "bot", correction = "") {
+  const el = document.createElement("div");
+  el.className = "msg " + who;
+
+  const label = document.createElement("small");
+  label.textContent = who === "bot" ? "ALEX · PARTNER" : "YOU";
+
+  const body = document.createElement("div");
+  body.textContent = text;
+  el.append(label, body);
+
+  if (correction) {
+    const c = document.createElement("div");
+    c.className = "correction";
+    c.textContent = correction;
+    el.append(c);
+  }
+
+  if (who === "bot") {
+    const speak = document.createElement("button");
+    speak.className = "secondary";
+    speak.textContent = "🔊 Listen";
+    speak.style.marginTop = "8px";
+    speak.onclick = () => speakText(text);
+    el.append(speak);
+  }
+
+  messages.append(el);
+  messages.scrollTop = messages.scrollHeight;
 }
-function speakText(text){
- if(!('speechSynthesis' in window)){addMessage('Your browser does not support text-to-speech. You can still read the messages.');return}
- speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';
- const selected=$('voice').value;const v=speechSynthesis.getVoices().find(x=>x.name===selected);if(v)u.voice=v;
- u.rate=$('level').value==='beginner'?.82:$('level').value==='advanced'?1.02:.92;speechSynthesis.speak(u);
+
+function speakText(text) {
+  if (!("speechSynthesis" in window) ||
+      !("SpeechSynthesisUtterance" in window)) {
+    addMessage("Speech playback is not supported in this browser.");
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-US";
+
+  const selected = $("voice").value;
+  const voice = window.speechSynthesis.getVoices()
+    .find(v => v.name === selected);
+
+  if (voice) utterance.voice = voice;
+
+  const level = $("level").value;
+  utterance.rate = level === "beginner" ? 0.82 :
+                   level === "advanced" ? 1.02 : 0.92;
+
+  window.speechSynthesis.speak(utterance);
 }
-function start(){
- currentTopic=$('topic').value;turn=0;messages.innerHTML='';
- addMessage(openings[currentTopic]);$('userInput').focus();
+
+function start() {
+  currentTopic = $("topic").value;
+  turn = 0;
+  messages.replaceChildren();
+
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+
+  if (listening && recognition) {
+    try { recognition.stop(); } catch (e) {}
+  }
+
+  listening = false;
+  $("micBtn").textContent = "🎙️";
+  $("status").textContent = "● Conversation started";
+
+  addMessage(openings[currentTopic]);
+  input.focus();
 }
-function correctEnglish(text){
- let corrected=text.trim().replace(/\s+/g,' ').replace(/\bi\b/g,'I');
- corrected=corrected.replace(/\b(i am|i'm)\s+([a-z]+)/gi,(m,a,b)=>a.charAt(0).toUpperCase()+a.slice(1)+' '+b);
- corrected=corrected.replace(/\b(im|dont|doesnt|cant|wont|didnt|isnt|arent|wasnt|werent)\b/gi,m=>({'im':"I'm",'dont':"don't",'doesnt':"doesn't",'cant':"can't",'wont':"won't",'didnt':"didn't",'isnt':"isn't",'arent':"aren't",'wasnt':"wasn't",'werent':"weren't"}[m.toLowerCase()]));
- if(corrected && !/[.!?]$/.test(corrected))corrected+='.';
- return corrected;
+
+function correctEnglish(text) {
+  let corrected = text.trim().replace(/\s+/g, " ");
+  corrected = corrected.replace(/\bi\b/g, "I");
+
+  corrected = corrected.replace(
+    /\b(im|dont|doesnt|cant|wont|didnt|isnt|arent|wasnt|werent)\b/gi,
+    word => ({
+      im: "I'm",
+      dont: "don't",
+      doesnt: "doesn't",
+      cant: "can't",
+      wont: "won't",
+      didnt: "didn't",
+      isnt: "isn't",
+      arent: "aren't",
+      wasnt: "wasn't",
+      werent: "weren't"
+    })[word.toLowerCase()]
+  );
+
+  if (corrected && !/[.!?]$/.test(corrected)) {
+    corrected += ".";
+  }
+
+  return corrected;
 }
-function feedback(original,corrected){
- if(!original.trim())return '';
- if(original.trim()===corrected.trim())return 'Good effort! Your sentence looks clear. Try adding a detail or an example to make your answer richer.';
- if(original.trim().toLowerCase()!==corrected.trim().toLowerCase())return 'A more polished version: “'+corrected+'”';
- return 'Nice work! Remember to use a capital letter at the beginning and punctuation at the end.';
+
+function feedback(original, corrected) {
+  if (original.trim() === corrected.trim()) {
+    return "Good effort! Your sentence looks clear. Try adding a detail or an example.";
+  }
+
+  if (original.trim().toLowerCase() !== corrected.trim().toLowerCase()) {
+    return "Suggested improvement: " + corrected;
+  }
+
+  return "Nice work! Check the capital letter and punctuation.";
 }
-function respond(){
- const text=input.value.trim();if(!text)return;
- addMessage(text,'user');input.value='';input.style.height='auto';
- const fixed=correctEnglish(text),tip=feedback(text,fixed);
- turn++;
- let reply;
- const lower=text.toLowerCase();
- if(/repeat|slowly|didn't understand|don't understand|pardon/.test(lower))reply="Of course. I’ll try to speak more slowly. What part would you like me to explain?";
- else if(/thank/.test(lower))reply="You’re very welcome! Let’s keep practising. "+(followups[currentTopic][turn%3]);
- else if(/how are you/.test(lower))reply="I’m doing well, thank you! And you? "+followups[currentTopic][turn%3];
- else if(currentTopic==='interview'&&turn===1)reply="Thank you for that introduction. "+followups[currentTopic][0];
- else reply=["That’s interesting! Could you tell me a little more?","Thanks for sharing that. "+followups[currentTopic][turn%3],"I see what you mean. Can you give me an example?","That sounds good. What makes you feel that way?"][turn%4];
- const level=$('level').value;
- if(level==='beginner' && reply.length>105)reply=followups[currentTopic][turn%3];
- setTimeout(()=>{addMessage(reply,'bot',tip);},220);
+
+function respond() {
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage(text, "user");
+  input.value = "";
+  input.style.height = "auto";
+
+  const fixed = correctEnglish(text);
+  const tip = feedback(text, fixed);
+
+  turn++;
+  const lower = text.toLowerCase();
+  const questions = followups[currentTopic];
+  let reply;
+
+  if (/repeat|slowly|didn't understand|don't understand|pardon/.test(lower)) {
+    reply = "Of course. I'll try to speak more slowly. Which part would you like me to explain?";
+  } else if (/thank/.test(lower)) {
+    reply = "You're very welcome! " + questions[turn % questions.length];
+  } else if (/how are you/.test(lower)) {
+    reply = "I'm doing well, thank you! " + questions[turn % questions.length];
+  } else if (currentTopic === "interview" && turn === 1) {
+    reply = "Thank you for that introduction. " + questions[0];
+  } else {
+    const replies = [
+      "That's interesting! Could you tell me a little more?",
+      "Thanks for sharing that. " + questions[turn % questions.length],
+      "I see what you mean. Can you give me an example?",
+      "That sounds good. What makes you feel that way?"
+    ];
+    reply = replies[turn % replies.length];
+  }
+
+  if ($("level").value === "beginner" && reply.length > 105) {
+    reply = questions[turn % questions.length];
+  }
+
+  window.setTimeout(() => addMessage(reply, "bot", tip), 220);
 }
-$('startBtn').onclick=start;$('resetBtn').onclick=start;$('sendBtn').onclick=respond;
-input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();respond()}});
-input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(input.scrollHeight,130)+'px'});
-document.querySelectorAll('[data-reply]').forEach(b=>b.onclick=()=>{input.value=b.dataset.reply;respond()});
-function loadVoices(){const list=$('voice');const voices=speechSynthesis?.getVoices?.()||[];const keep=list.value;list.innerHTML='<option value="">Default English voice</option>';voices.filter(v=>v.lang.toLowerCase().startsWith('en')).forEach(v=>{const o=document.createElement('option');o.value=v.name;o.textContent=v.name+' ('+v.lang+')';list.append(o)});list.value=keep}
-if('speechSynthesis'in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
-const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
-if(SpeechRecognition){
- const recognition=new SpeechRecognition();recognition.lang='en-US';recognition.interimResults=false;recognition.maxAlternatives=1;
- $('micBtn').onclick=()=>{if(listening){recognition.stop();return}try{listening=true;$('micBtn').textContent='⏹️';recognition.start()}catch(e){listening=false;$('micBtn').textContent='🎙️';addMessage('The microphone could not start. Check browser permission and try again.')}}; 
- recognition.onresult=e=>{input.value=e.results[0][0].transcript;input.dispatchEvent(new Event('input'));input.focus()};
- recognition.onerror=e=>addMessage('Microphone message: '+e.error+'. You can type your reply instead.');
- recognition.onend=()=>{listening=false;$('micBtn').textContent='🎙️'};
-}else{$('micBtn').onclick=()=>addMessage('Speech recognition is not available in this browser. Try Chrome, allow microphone access, or type your reply.');}
+
+$("startBtn").addEventListener("click", start);
+$("resetBtn").addEventListener("click", start);
+$("sendBtn").addEventListener("click", respond);
+
+input.addEventListener("keydown", event => {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    respond();
+  }
+});
+
+input.addEventListener("input", () => {
+  input.style.height = "auto";
+  input.style.height = Math.min(input.scrollHeight, 130) + "px";
+});
+
+document.querySelectorAll("[data-reply]").forEach(button => {
+  button.addEventListener("click", () => {
+    input.value = button.dataset.reply;
+    respond();
+  });
+});
+
+function loadVoices() {
+  if (!("speechSynthesis" in window)) return;
+
+  const list = $("voice");
+  const previous = list.value;
+
+  list.replaceChildren(new Option("Default English voice", ""));
+
+  window.speechSynthesis.getVoices()
+    .filter(voice => voice.lang && voice.lang.toLowerCase().startsWith("en"))
+    .forEach(voice => {
+      list.add(new Option(voice.name + " (" + voice.lang + ")", voice.name));
+    });
+
+  if ([...list.options].some(option => option.value === previous)) {
+    list.value = previous;
+  }
+}
+
+if ("speechSynthesis" in window) {
+  loadVoices();
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+  recognition = new SpeechRecognition();
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  $("micBtn").addEventListener("click", () => {
+    if (listening) {
+      try { recognition.stop(); } catch (e) {}
+      return;
+    }
+
+    try {
+      listening = true;
+      $("micBtn").textContent = "⏹️";
+      $("status").textContent = "● Listening...";
+
+      recognition.start();
+    } catch (error) {
+      listening = false;
+      $("micBtn").textContent = "🎙️";
+      $("status").textContent = "● Ready to practise";
+      addMessage("The microphone could not start. Check permissions and try again.");
+    }
+  });
+
+  recognition.onresult = event => {
+    input.value = event.results[0][0].transcript;
+    input.dispatchEvent(new Event("input"));
+    input.focus();
+    $("status").textContent = "● Speech captured — press Send";
+  };
+
+  recognition.onerror = event => {
+    const message =
+      event.error === "not-allowed" || event.error === "service-not-allowed"
+        ? "Microphone access denied. Allow microphone access in browser settings."
+        : event.error === "no-speech"
+          ? "No speech detected. Try again or type your reply."
+          : "Speech recognition error: " + event.error + ". You can type instead.";
+
+    addMessage(message);
+  };
+
+  recognition.onend = () => {
+    listening = false;
+    $("micBtn").textContent = "🎙️";
+    $("status").textContent = "● Ready to practise";
+  };
+} else {
+  $("micBtn").addEventListener("click", () => {
+    addMessage("Speech recognition is not supported in this browser. Try Chrome or type your reply.");
+  });
+}
+
 start();
 </script>
 </body>
